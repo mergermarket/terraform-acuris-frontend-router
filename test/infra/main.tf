@@ -15,14 +15,14 @@ provider "aws" {
 module "frontend_router" {
   source = "../.."
 
-  fastly_domain                  = "${var.fastly_domain}"
-  alb_domain                     = "${var.alb_domain}"
-  team                           = "${var.team}"
-  env                            = "${var.env}"
-  component                      = "${var.component}"
-  platform_config                = "${var.platform_config}"
-  force_ssl                      = "${var.force_ssl}"
-  default_target_group_component = "${var.default_target_group_component}"
+  fastly_domain                  = var.fastly_domain
+  alb_domain                     = var.alb_domain
+  team                           = var.team
+  env                            = var.env
+  component                      = var.component
+  platform_config                = var.platform_config
+  force_ssl                      = var.force_ssl
+  default_target_group_component = var.default_target_group_component
   run_data                       = false
 
   # optional
@@ -32,12 +32,12 @@ module "frontend_router" {
 module "frontend_router_disable_fastly_caching" {
   source = "../.."
 
-  fastly_domain   = "${var.fastly_domain}"
-  alb_domain      = "${var.alb_domain}"
-  team            = "${var.team}"
-  env             = "${var.env}"
-  component       = "${var.component}"
-  platform_config = "${var.platform_config}"
+  fastly_domain   = var.fastly_domain
+  alb_domain      = var.alb_domain
+  team            = var.team
+  env             = var.env
+  component       = var.component
+  platform_config = var.platform_config
   run_data        = false
 
   # optional
@@ -47,28 +47,28 @@ module "frontend_router_disable_fastly_caching" {
 module "frontend_router_timeouts" {
   source = "../.."
 
-  fastly_domain         = "${var.fastly_domain}"
-  alb_domain            = "${var.alb_domain}"
-  team                  = "${var.team}"
-  env                   = "${var.env}"
-  component             = "${var.component}"
-  platform_config       = "${var.platform_config}"
-  connect_timeout       = "${var.connect_timeout}"
-  first_byte_timeout    = "${var.first_byte_timeout}"
-  between_bytes_timeout = "${var.between_bytes_timeout}"
+  fastly_domain         = var.fastly_domain
+  alb_domain            = var.alb_domain
+  team                  = var.team
+  env                   = var.env
+  component             = var.component
+  platform_config       = var.platform_config
+  connect_timeout       = var.connect_timeout
+  first_byte_timeout    = var.first_byte_timeout
+  between_bytes_timeout = var.between_bytes_timeout
   run_data              = false
 }
 
 module "frontend_router_shield" {
   source = "../.."
 
-  fastly_domain         = "${var.fastly_domain}"
-  alb_domain            = "${var.alb_domain}"
-  team                  = "${var.team}"
-  env                   = "${var.env}"
-  component             = "${var.component}"
-  platform_config       = "${var.platform_config}"
-  shield                = "${var.shield}"
+  fastly_domain         = var.fastly_domain
+  alb_domain            = var.alb_domain
+  team                  = var.team
+  env                   = var.env
+  component             = var.component
+  platform_config       = var.platform_config
+  shield                = var.shield
   run_data              = false
 }
 
@@ -92,33 +92,33 @@ variable "default_target_group_component" {
 }
 
 variable "platform_config" {
-  type = "map"
+  type = map
 }
 
 variable "connect_timeout" {
-  type        = "string"
+  type        = string
   description = ""
   default     = 5000
 }
 
 variable "first_byte_timeout" {
-  type        = "string"
+  type        = string
   description = ""
   default     = 60000
 }
 
 variable "between_bytes_timeout" {
-  type        = "string"
+  type        = string
   description = ""
   default     = 30000
 }
 
 variable "force_ssl" {
-  type    = "string"
+  type    = string
   default = "true"
 }
 
 variable "shield" {
-  type    = "string"
+  type    = string
   default = ""
 }

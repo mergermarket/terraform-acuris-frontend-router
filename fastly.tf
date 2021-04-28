@@ -1,5 +1,5 @@
 module "fastly" {
-  source = "github.com/mergermarket/terraform-acuris-fastly-frontend"
+  source = "./modules/fastly-frontend"
 
   domain_name                 = var.fastly_domain
   bare_redirect_domain_name   = var.bare_redirect_domain_name

@@ -1,0 +1,542 @@
+{
+   "resource_changes":[
+      {
+         "address":"module.fastly.fastly_service_v1.fastly",
+         "module_address":"module.fastly",
+         "mode":"managed",
+         "type":"fastly_service_v1",
+         "name":"fastly",
+         "provider_name":"fastly",
+         "change":{
+            "actions":[
+               "create"
+            ],
+            "before":"None",
+            "after":{
+               "acl":[
+                  
+               ],
+               "activate":true,
+               "backend":[
+                  {
+                     "address":"1.1.1.1",
+                     "auto_loadbalance":true,
+                     "between_bytes_timeout":30000,
+                     "connect_timeout":5000,
+                     "error_threshold":0,
+                     "first_byte_timeout":60000,
+                     "healthcheck":"",
+                     "max_conn":200,
+                     "max_tls_version":"",
+                     "min_tls_version":"",
+                     "name":"default backend",
+                     "override_host":"",
+                     "port":443,
+                     "request_condition":"",
+                     "shield":"",
+                     "ssl_ca_cert":"",
+                     "ssl_cert_hostname":"",
+                     "ssl_check_cert":true,
+                     "ssl_ciphers":"",
+                     "ssl_client_cert":"",
+                     "ssl_client_key":"",
+                     "ssl_hostname":"",
+                     "ssl_sni_hostname":"",
+                     "use_ssl":true,
+                     "weight":100
+                  }
+               ],
+               "bigquerylogging":[
+                  
+               ],
+               "blobstoragelogging":[
+                  
+               ],
+               "cache_setting":[
+                  
+               ],
+               "comment":"Managed by Terraform",
+               "condition":[
+                  {
+                     "name":"override-robots.txt-condition",
+                     "priority":5,
+                     "statement":"req.url ~ \"^/robots.txt\"",
+                     "type":"REQUEST"
+                  },
+                  {
+                     "name":"response-404-condition",
+                     "priority":5,
+                     "statement":"now.sec == \"\"",
+                     "type":"CACHE"
+                  },
+                  {
+                     "name":"response-500-condition",
+                     "priority":5,
+                     "statement":"now.sec == \"\"",
+                     "type":"CACHE"
+                  },
+                  {
+                     "name":"response-502-condition",
+                     "priority":5,
+                     "statement":"beresp.status == 502 && req.http.Cookie:viewerror != \"true\"",
+                     "type":"CACHE"
+                  },
+                  {
+                     "name":"response-503-condition",
+                     "priority":5,
+                     "statement":"beresp.status == 503 && req.http.Cookie:viewerror != \"true\"",
+                     "type":"CACHE"
+                  },
+                  {
+                     "name":"surrogate-key-condition",
+                     "priority":10,
+                     "statement":"beresp.http.default-surrogate-key != \"\"",
+                     "type":"CACHE"
+                  },
+                  {
+                     "name":"syslog-no-shield-condition",
+                     "priority":10,
+                     "statement":"!req.http.Fastly-FF",
+                     "type":"RESPONSE"
+                  }
+               ],
+               "default_host":"ci-www.domain.com",
+               "default_ttl":60,
+               "dictionary":[
+                  
+               ],
+               "director":[
+                  
+               ],
+               "domain":[
+                  {
+                     "comment":"",
+                     "name":"ci-www.domain.com"
+                  }
+               ],
+               "dynamicsnippet":[
+                  
+               ],
+               "force_destroy":true,
+               "gcslogging":[
+                  
+               ],
+               "gzip":[
+                  {
+                     "cache_condition":"",
+                     "content_types":[
+                        "application/json",
+                        "text/css",
+                        "text/html"
+                     ],
+                     "extensions":[
+                        "css",
+                        "js"
+                     ],
+                     "name":"file extensions and content types"
+                  }
+               ],
+               "header":[
+                  {
+                     "action":"delete",
+                     "cache_condition":"",
+                     "destination":"http.X-Powered-By",
+                     "ignore_if_set":false,
+                     "name":"Remove X-Powered-By header",
+                     "priority":100,
+                     "request_condition":"",
+                     "response_condition":"",
+                     "type":"cache"
+                  },
+                  {
+                     "action":"set",
+                     "cache_condition":"",
+                     "destination":"http.Server",
+                     "ignore_if_set":false,
+                     "name":"Obfuscate Server header",
+                     "priority":100,
+                     "request_condition":"",
+                     "response_condition":"",
+                     "source":"\"LHC\"",
+                     "type":"cache"
+                  },
+                  {
+                     "action":"set",
+                     "cache_condition":"surrogate-key-condition",
+                     "destination":"http.Surrogate-Key",
+                     "ignore_if_set":false,
+                     "name":"Surrogate Key to Amazon",
+                     "priority":10,
+                     "request_condition":"",
+                     "response_condition":"",
+                     "source":"beresp.http.default-surrogate-key",
+                     "type":"cache"
+                  }
+               ],
+               "healthcheck":[
+                  
+               ],
+               "httpslogging":[
+                  
+               ],
+               "logentries":[
+                  
+               ],
+               "logging_cloudfiles":[
+                  
+               ],
+               "logging_datadog":[
+                  
+               ],
+               "logging_digitalocean":[
+                  
+               ],
+               "logging_elasticsearch":[
+                  
+               ],
+               "logging_ftp":[
+                  
+               ],
+               "logging_googlepubsub":[
+                  
+               ],
+               "logging_heroku":[
+                  
+               ],
+               "logging_honeycomb":[
+                  
+               ],
+               "logging_kafka":[
+                  
+               ],
+               "logging_kinesis":[
+                  
+               ],
+               "logging_loggly":[
+                  
+               ],
+               "logging_logshuttle":[
+                  
+               ],
+               "logging_newrelic":[
+                  
+               ],
+               "logging_openstack":[
+                  
+               ],
+               "logging_scalyr":[
+                  
+               ],
+               "logging_sftp":[
+                  
+               ],
+               "name":"ci-www.domain.com",
+               "papertrail":[
+                  
+               ],
+               "request_setting":[
+                  {
+                     "action":"",
+                     "bypass_busy_wait":false,
+                     "default_host":"",
+                     "force_miss":"None",
+                     "force_ssl":true,
+                     "geo_headers":"None",
+                     "hash_keys":"",
+                     "max_stale_age":"None",
+                     "name":"request-setting",
+                     "request_condition":"",
+                     "timer_support":"None",
+                     "xff":"append"
+                  }
+               ],
+               "response_object":[
+                  {
+                     "cache_condition":"",
+                     "content":"User-agent: *\nDisallow: /\n",
+                     "content_type":"text/plain",
+                     "name":"override-robots.txt",
+                     "request_condition":"override-robots.txt-condition",
+                     "response":"OK",
+                     "status":200
+                  },
+                  {
+                     "cache_condition":"response-404-condition",
+                     "content":"",
+                     "content_type":"text/html",
+                     "name":"error-response-404",
+                     "request_condition":"",
+                     "response":"Not Found",
+                     "status":404
+                  },
+                  {
+                     "cache_condition":"response-500-condition",
+                     "content":"",
+                     "content_type":"text/html",
+                     "name":"error-response-500",
+                     "request_condition":"",
+                     "response":"Server Error",
+                     "status":500
+                  },
+                  {
+                     "cache_condition":"response-502-condition",
+                     "content":"abc",
+                     "content_type":"text/html",
+                     "name":"error-response-502",
+                     "request_condition":"",
+                     "response":"Bad Gateway",
+                     "status":502
+                  },
+                  {
+                     "cache_condition":"response-503-condition",
+                     "content":"abc",
+                     "content_type":"text/html",
+                     "name":"error-response-503",
+                     "request_condition":"",
+                     "response":"Service Unavailable",
+                     "status":503
+                  }
+               ],
+               "s3logging":[
+                  
+               ],
+               "snippet":[
+                  
+               ],
+               "splunk":[
+                  
+               ],
+               "sumologic":[
+                  
+               ],
+               "syslog":[
+                  {
+                     "address":"intake.logs.datadoghq.com",
+                     "format":" {  \"ddsource\": \"fastly\",  \"service\": \"%{req.http.host}V\",  \"date\": \"%{begin:%Y-%m-%dT%H:%M:%S%Z}t\",  \"time_start\": \"%{begin:%Y-%m-%dT%H:%M:%S%Z}t\",  \"time_end\": \"%{end:%Y-%m-%dT%H:%M:%S%Z}t\",  \"http\": {    \"request_time_ms\": %D,    \"method\": \"%m\",    \"url\": \"%{json.escape(req.url)}V\",    \"useragent\": \"%{User-Agent}i\",    \"referer\": \"%{Referer}i\",    \"protocol\": \"%H\",    \"request_x_forwarded_for\": \"%{X-Forwarded-For}i\",    \"status_code\": \"%s\"  },  \"network\": {    \"client\": {     \"ip\": \"%h\",     \"name\": \"%{client.as.name}V\",     \"number\": \"%{client.as.number}V\",     \"connection_speed\": \"%{client.geo.conn_speed}V\"    },   \"destination\": {     \"ip\": \"%A\"    },  \"bytes_written\": %B,  \"bytes_read\": %{req.body_bytes_read}V  },  \"host\": \"%{Fastly-Orig-Host}i\",  \"origin_host\": \"%v\",  \"is_ipv6\": %{if(req.is_ipv6, \"true\", \"false\")}V,  \"is_tls\": %{if(req.is_ssl, \"true\", \"false\")}V,  \"tls_client_protocol\": \"%{json.escape(tls.client.protocol)}V\",  \"tls_client_servername\": \"%{json.escape(tls.client.servername)}V\",  \"tls_client_cipher\": \"%{json.escape(tls.client.cipher)}V\",  \"tls_client_cipher_sha\": \"%{json.escape(tls.client.ciphers_sha)}V\",  \"tls_client_tlsexts_sha\": \"%{json.escape(tls.client.tlsexts_sha)}V\",  \"is_h2\": %{if(fastly_info.is_h2, \"true\", \"false\")}V,  \"is_h2_push\": %{if(fastly_info.h2.is_push, \"true\", \"false\")}V,  \"h2_stream_id\": \"%{fastly_info.h2.stream_id}V\",  \"request_accept_content\": \"%{Accept}i\",  \"request_accept_language\": \"%{Accept-Language}i\",  \"request_accept_encoding\": \"%{Accept-Encoding}i\",  \"request_accept_charset\": \"%{Accept-Charset}i\",  \"request_connection\": \"%{Connection}i\",  \"request_dnt\": \"%{DNT}i\",  \"request_forwarded\": \"%{Forwarded}i\",  \"request_via\": \"%{Via}i\",  \"request_cache_control\": \"%{Cache-Control}i\",  \"request_x_correlation_id\": \"%{X-Correlation-Id}i\",  \"request_x_client_ip\": \"%{X-Client-IP}i\",  \"request_x_requested_with\": \"%{X-Requested-With}i\",  \"request_x_att_device_id\": \"%{X-ATT-Device-Id}i\",  \"content_type\": \"%{Content-Type}o\",  \"is_cacheable\": %{if(fastly_info.state~\"^(HIT|MISS)$\", \"true\",\"false\")}V,  \"response_age\": \"%{Age}o\",  \"response_cache_control\": \"%{Cache-Control}o\",  \"response_expires\": \"%{Expires}o\",  \"response_last_modified\": \"%{Last-Modified}o\",  \"response_tsv\": \"%{TSV}o\",  \"server_datacenter\": \"%{server.datacenter}V\",  \"req_header_size\": %{req.header_bytes_read}V,  \"resp_header_size\": %{resp.header_bytes_written}V,  \"socket_cwnd\": %{client.socket.cwnd}V,  \"socket_nexthop\": \"%{client.socket.nexthop}V\",  \"socket_tcpi_rcv_mss\": %{client.socket.tcpi_rcv_mss}V,  \"socket_tcpi_snd_mss\": %{client.socket.tcpi_snd_mss}V,  \"socket_tcpi_rtt\": %{client.socket.tcpi_rtt}V,  \"socket_tcpi_rttvar\": %{client.socket.tcpi_rttvar}V,  \"socket_tcpi_rcv_rtt\": %{client.socket.tcpi_rcv_rtt}V,  \"socket_tcpi_rcv_space\": %{client.socket.tcpi_rcv_space}V,  \"socket_tcpi_last_data_sent\": %{client.socket.tcpi_last_data_sent}V,  \"socket_tcpi_total_retrans\": %{client.socket.tcpi_total_retrans}V,  \"socket_tcpi_delta_retrans\": %{client.socket.tcpi_delta_retrans}V,  \"socket_ploss\": %{client.socket.ploss}V}",
+                     "format_version":2,
+                     "message_type":"blank",
+                     "name":"ci-www.domain.com-syslog",
+                     "placement":"",
+                     "port":10516,
+                     "response_condition":"syslog-no-shield-condition",
+                     "tls_ca_cert":"",
+                     "tls_client_cert":"",
+                     "tls_client_key":"",
+                     "tls_hostname":"intake.logs.datadoghq.com",
+                     "token":"",
+                     "use_tls":true
+                  }
+               ],
+               "vcl":[
+                  {
+                     "content":"/**\n * This is based on the fastly-boilerplate.vcl - to see the differences run:\n *\n *    diff -u fastly-boilerplate.vcl custom.vcl\n */\n\nsub vcl_recv {\n#FASTLY recv\n\n  \n  if (! req.http.fastly-ff) {\n\n    # Adds X-Client-IP header\n    set req.http.X-Client-IP = req.http.Fastly-Client-IP;\n    \n    \n  }\n  if (req.http.fastly-ff) {\n    \n  }\n\n  if (req.request != \"HEAD\" && req.request != \"GET\" && req.request != \"FASTLYPURGE\") {\n    return(pass);\n  }\n\n  return(lookup);\n}\n\nsub vcl_fetch {\n#FASTLY fetch\n\n  if ((beresp.status == 500 || beresp.status == 503) && req.restarts < 1 && (req.request == \"GET\" || req.request == \"HEAD\")) {\n    restart;\n  }\n\n  if (req.restarts > 0) {\n    set beresp.http.Fastly-Restarts = req.restarts;\n  }\n\n  if (beresp.http.Set-Cookie) {\n    set req.http.Fastly-Cachetype = \"SETCOOKIE\";\n    return(pass);\n  }\n\n  if (beresp.http.Cache-Control ~ \"private|no-cache\") {\n    set req.http.Fastly-Cachetype = \"PRIVATE\";\n    return(pass);\n  }\n\n  if (beresp.status == 500 || beresp.status == 503) {\n    set req.http.Fastly-Cachetype = \"ERROR\";\n    set beresp.ttl = 1s;\n    set beresp.grace = 5s;\n    return(deliver);\n  }\n\n  if (beresp.http.Expires || beresp.http.Surrogate-Control ~ \"max-age\" || beresp.http.Cache-Control ~ \"(s-maxage|max-age)\") {\n    # keep the ttl here\n  } else {\n    # apply the default ttl\n    set beresp.ttl = 3600s;\n  }\n\n  return(deliver);\n}\n\nsub vcl_hit {\n#FASTLY hit\n\n  if (!obj.cacheable) {\n    return(pass);\n  }\n  return(deliver);\n}\n\nsub vcl_miss {\n#FASTLY miss\n  return(fetch);\n}\n\nsub vcl_deliver {\n#FASTLY deliver\n\n  \n\n  return(deliver);\n}\n\nsub vcl_error {\n#FASTLY error\n\n /* handle proxy errors */\n if (obj.status == 502 || obj.status == 503) {\n   synthetic {\"abc\"};\n   return(deliver);\n }\n\n  \n}\n\nsub vcl_pass {\n#FASTLY pass\n}\n\nsub vcl_log {\n#FASTLY log\n}\n",
+                     "main":true,
+                     "name":"custom_vcl"
+                  }
+               ],
+               "version_comment":"None",
+               "waf":[
+                  
+               ]
+            },
+            "after_unknown":{
+               "acl":[
+                  
+               ],
+               "active_version":true,
+               "backend":[
+                  {
+                     
+                  }
+               ],
+               "bigquerylogging":[
+                  
+               ],
+               "blobstoragelogging":[
+                  
+               ],
+               "cache_setting":[
+                  
+               ],
+               "cloned_version":true,
+               "condition":[
+                  {
+                     
+                  },
+                  {
+                     
+                  },
+                  {
+                     
+                  },
+                  {
+                     
+                  },
+                  {
+                     
+                  },
+                  {
+                     
+                  },
+                  {
+                     
+                  }
+               ],
+               "dictionary":[
+                  
+               ],
+               "director":[
+                  
+               ],
+               "domain":[
+                  {
+                     
+                  }
+               ],
+               "dynamicsnippet":[
+                  
+               ],
+               "gcslogging":[
+                  
+               ],
+               "gzip":[
+                  {
+                     "content_types":[
+                        false,
+                        false,
+                        false
+                     ],
+                     "extensions":[
+                        false,
+                        false
+                     ]
+                  }
+               ],
+               "header":[
+                  {
+                     "regex":true,
+                     "source":true,
+                     "substitution":true
+                  },
+                  {
+                     "regex":true,
+                     "substitution":true
+                  },
+                  {
+                     "regex":true,
+                     "substitution":true
+                  }
+               ],
+               "healthcheck":[
+                  
+               ],
+               "httpslogging":[
+                  
+               ],
+               "id":true,
+               "logentries":[
+                  
+               ],
+               "logging_cloudfiles":[
+                  
+               ],
+               "logging_datadog":[
+                  
+               ],
+               "logging_digitalocean":[
+                  
+               ],
+               "logging_elasticsearch":[
+                  
+               ],
+               "logging_ftp":[
+                  
+               ],
+               "logging_googlepubsub":[
+                  
+               ],
+               "logging_heroku":[
+                  
+               ],
+               "logging_honeycomb":[
+                  
+               ],
+               "logging_kafka":[
+                  
+               ],
+               "logging_kinesis":[
+                  
+               ],
+               "logging_loggly":[
+                  
+               ],
+               "logging_logshuttle":[
+                  
+               ],
+               "logging_newrelic":[
+                  
+               ],
+               "logging_openstack":[
+                  
+               ],
+               "logging_scalyr":[
+                  
+               ],
+               "logging_sftp":[
+                  
+               ],
+               "papertrail":[
+                  
+               ],
+               "request_setting":[
+                  {
+                     
+                  }
+               ],
+               "response_object":[
+                  {
+                     
+                  },
+                  {
+                     
+                  },
+                  {
+                     
+                  },
+                  {
+                     
+                  },
+                  {
+                     
+                  }
+               ],
+               "s3logging":[
+                  
+               ],
+               "snippet":[
+                  
+               ],
+               "splunk":[
+                  
+               ],
+               "sumologic":[
+                  
+               ],
+               "syslog":[
+                  {
+                     
+                  }
+               ],
+               "vcl":[
+                  {
+                     
+                  }
+               ],
+               "waf":[
+                  
+               ]
+            }
+         }
+      }
+   ]
+}

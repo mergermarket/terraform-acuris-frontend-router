@@ -6,7 +6,7 @@ module "default_backend_ecs_service" {
 }
 
 module "alb" {
-  source = "mergermarket/alb/acuris"
+  source = "./modules/alb"
 
   name = "${replace(
     replace(
@@ -18,7 +18,7 @@ module "alb" {
     "",
   )}-router"
   vpc_id                   = var.platform_config["vpc"]
-  subnet_ids               = [split(",", var.platform_config["public_subnets"])]
+  subnet_ids               = split(",", var.platform_config["public_subnets"])
   extra_security_groups    = [var.platform_config["ecs_cluster.${var.ecs_cluster}.client_security_group"]]
   internal                 = "false"
   certificate_domain_name  = format("*.%s%s", var.env != "live" ? "dev." : "", var.alb_domain)
@@ -36,7 +36,7 @@ module "alb" {
 }
 
 module "dns_record" {
-  source = "mergermarket/route53-dns/acuris"
+  source = "./modules/route53-dns"
 
   domain      = var.alb_domain
   name        = var.component
@@ -44,6 +44,7 @@ module "dns_record" {
   target      = module.alb.alb_dns_name
   alb_zone_id = module.alb.alb_zone_id
   alias       = "1"
+  zone_id     = var.run_data ? "" : "TESTZONEID"
 }
 
 locals {

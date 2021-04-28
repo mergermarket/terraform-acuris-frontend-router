@@ -8,7 +8,7 @@ resource "aws_alb_target_group" "target_group" {
   # port will be set dynamically, but for some reason AWS requires a value
   port                 = "31337"
   protocol             = "HTTP"
-  vpc_id               = "${var.vpc_id}"
+  vpc_id               = var.vpc_id
   deregistration_delay = "10"
 
   health_check {

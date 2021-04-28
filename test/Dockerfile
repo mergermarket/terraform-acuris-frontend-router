@@ -1,7 +1,7 @@
 FROM python:3-alpine3.8
 COPY requirements.txt .
 
-ENV TERRAFORM_VERSION=0.11.11
+ENV TERRAFORM_VERSION=0.12.30
 
 RUN apk -U add gcc musl-dev libffi-dev openssl-dev docker curl git zip unzip wget
 

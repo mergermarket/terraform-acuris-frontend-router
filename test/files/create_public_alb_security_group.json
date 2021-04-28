@@ -1,0 +1,139 @@
+{
+    "resource_changes":[
+       {
+          "address":"module.frontend_router.module.alb.aws_security_group.default",
+          "module_address":"module.frontend_router.module.alb",
+          "mode":"managed",
+          "type":"aws_security_group",
+          "name":"default",
+          "provider_name":"aws",
+          "change":{
+             "actions":[
+                "create"
+             ],
+             "before":"None",
+             "after":{
+                "description":"Managed by Terraform",
+                "egress":[
+                   {
+                      "cidr_blocks":[
+                         "0.0.0.0/0"
+                      ],
+                      "description":"",
+                      "from_port":0,
+                      "ipv6_cidr_blocks":[
+                         
+                      ],
+                      "prefix_list_ids":[
+                         
+                      ],
+                      "protocol":"-1",
+                      "security_groups":[
+                         
+                      ],
+                      "self":false,
+                      "to_port":0
+                   }
+                ],
+                "ingress":[
+                   {
+                      "cidr_blocks":[
+                         "0.0.0.0/0"
+                      ],
+                      "description":"",
+                      "from_port":443,
+                      "ipv6_cidr_blocks":[
+                         
+                      ],
+                      "prefix_list_ids":[
+                         
+                      ],
+                      "protocol":"tcp",
+                      "security_groups":[
+                         
+                      ],
+                      "self":false,
+                      "to_port":443
+                   },
+                   {
+                      "cidr_blocks":[
+                         "0.0.0.0/0"
+                      ],
+                      "description":"",
+                      "from_port":80,
+                      "ipv6_cidr_blocks":[
+                         
+                      ],
+                      "prefix_list_ids":[
+                         
+                      ],
+                      "protocol":"tcp",
+                      "security_groups":[
+                         
+                      ],
+                      "self":false,
+                      "to_port":80
+                   }
+                ],
+                "revoke_rules_on_delete":false,
+                "tags":"None",
+                "timeouts":"None",
+                "vpc_id":"vpc-12345678"
+             },
+             "after_unknown":{
+                "arn":true,
+                "egress":[
+                   {
+                      "cidr_blocks":[
+                         false
+                      ],
+                      "ipv6_cidr_blocks":[
+                         
+                      ],
+                      "prefix_list_ids":[
+                         
+                      ],
+                      "security_groups":[
+                         
+                      ]
+                   }
+                ],
+                "id":true,
+                "ingress":[
+                   {
+                      "cidr_blocks":[
+                         false
+                      ],
+                      "ipv6_cidr_blocks":[
+                         
+                      ],
+                      "prefix_list_ids":[
+                         
+                      ],
+                      "security_groups":[
+                         
+                      ]
+                   },
+                   {
+                      "cidr_blocks":[
+                         false
+                      ],
+                      "ipv6_cidr_blocks":[
+                         
+                      ],
+                      "prefix_list_ids":[
+                         
+                      ],
+                      "security_groups":[
+                         
+                      ]
+                   }
+                ],
+                "name":true,
+                "name_prefix":true,
+                "owner_id":true
+             }
+          }
+       }
+    ]
+ }

@@ -1,0 +1,337 @@
+{
+    "resource_changes":[
+       {
+          "address":"module.frontend_router.aws_alb_target_group.default_target_group",
+          "module_address":"module.frontend_router",
+          "mode":"managed",
+          "type":"aws_alb_target_group",
+          "name":"default_target_group",
+          "provider_name":"aws",
+          "change":{
+             "actions":[
+                "create"
+             ],
+             "before":"None",
+             "after":{
+                "deregistration_delay":10,
+                "health_check":[
+                   {
+                      "enabled":true,
+                      "healthy_threshold":2,
+                      "interval":5,
+                      "matcher":"200-299",
+                      "path":"/internal/healthcheck",
+                      "port":"traffic-port",
+                      "protocol":"HTTP",
+                      "timeout":4,
+                      "unhealthy_threshold":2
+                   }
+                ],
+                "lambda_multi_value_headers_enabled":false,
+                "name":"testenv-default-testcomponent",
+                "name_prefix":"None",
+                "port":31337,
+                "protocol":"HTTP",
+                "proxy_protocol_v2":false,
+                "slow_start":0,
+                "tags":{
+                   "component":"testcomponent-default-target-group",
+                   "environment":"testenv",
+                   "service":"testenv-testcomponent-default-target-group",
+                   "team":"testteam"
+                },
+                "target_type":"instance",
+                "vpc_id":"vpc-12345678"
+             },
+             "after_unknown":{
+                "arn":true,
+                "arn_suffix":true,
+                "health_check":[
+                   {
+                      
+                   }
+                ],
+                "id":true,
+                "load_balancing_algorithm_type":true,
+                "preserve_client_ip":true,
+                "protocol_version":true,
+                "stickiness":true,
+                "tags":{
+                   
+                }
+             }
+          }
+       },
+       {
+          "address":"module.frontend_router.module.alb.aws_alb.alb",
+          "module_address":"module.frontend_router.module.alb",
+          "mode":"managed",
+          "type":"aws_alb",
+          "name":"alb",
+          "provider_name":"aws",
+          "change":{
+             "actions":[
+                "create"
+             ],
+             "before":"None",
+             "after":{
+                "access_logs":[
+                   {
+                      "bucket":"",
+                      "enabled":false,
+                      "prefix":"None"
+                   }
+                ],
+                "customer_owned_ipv4_pool":"None",
+                "drop_invalid_header_fields":false,
+                "enable_cross_zone_load_balancing":"None",
+                "enable_deletion_protection":false,
+                "enable_http2":true,
+                "idle_timeout":60,
+                "internal":false,
+                "load_balancer_type":"application",
+                "name":"testenv-testcomponent-router",
+                "name_prefix":"None",
+                "subnets":[
+                   "subnet-33333333",
+                   "subnet-44444444",
+                   "subnet-55555555"
+                ],
+                "tags":{
+                   "component":"testcomponent",
+                   "environment":"testenv",
+                   "team":"testteam"
+                },
+                "timeouts":"None"
+             },
+             "after_unknown":{
+                "access_logs":[
+                   {
+                      
+                   }
+                ],
+                "arn":true,
+                "arn_suffix":true,
+                "dns_name":true,
+                "id":true,
+                "ip_address_type":true,
+                "security_groups":true,
+                "subnet_mapping":true,
+                "subnets":[
+                   false,
+                   false,
+                   false
+                ],
+                "tags":{
+                   
+                },
+                "vpc_id":true,
+                "zone_id":true
+             }
+          }
+       },
+       {
+          "address":"module.frontend_router.module.alb.aws_alb_listener.https",
+          "module_address":"module.frontend_router.module.alb",
+          "mode":"managed",
+          "type":"aws_alb_listener",
+          "name":"https",
+          "provider_name":"aws",
+          "change":{
+             "actions":[
+                "create"
+             ],
+             "before":"None",
+             "after":{
+                "alpn_policy":"None",
+                "certificate_arn":"",
+                "default_action":[
+                   {
+                      "authenticate_cognito":[
+                         
+                      ],
+                      "authenticate_oidc":[
+                         
+                      ],
+                      "fixed_response":[
+                         
+                      ],
+                      "forward":[
+                         
+                      ],
+                      "redirect":[
+                         
+                      ],
+                      "type":"forward"
+                   }
+                ],
+                "port":443,
+                "protocol":"HTTPS",
+                "timeouts":"None"
+             },
+             "after_unknown":{
+                "arn":true,
+                "default_action":[
+                   {
+                      "authenticate_cognito":[
+                         
+                      ],
+                      "authenticate_oidc":[
+                         
+                      ],
+                      "fixed_response":[
+                         
+                      ],
+                      "forward":[
+                         
+                      ],
+                      "order":true,
+                      "redirect":[
+                         
+                      ],
+                      "target_group_arn":true
+                   }
+                ],
+                "id":true,
+                "load_balancer_arn":true,
+                "ssl_policy":true
+             }
+          }
+       },
+       {
+          "address":"module.frontend_router.module.alb.aws_security_group.default",
+          "module_address":"module.frontend_router.module.alb",
+          "mode":"managed",
+          "type":"aws_security_group",
+          "name":"default",
+          "provider_name":"aws",
+          "change":{
+             "actions":[
+                "create"
+             ],
+             "before":"None",
+             "after":{
+                "description":"Managed by Terraform",
+                "egress":[
+                   {
+                      "cidr_blocks":[
+                         "0.0.0.0/0"
+                      ],
+                      "description":"",
+                      "from_port":0,
+                      "ipv6_cidr_blocks":[
+                         
+                      ],
+                      "prefix_list_ids":[
+                         
+                      ],
+                      "protocol":"-1",
+                      "security_groups":[
+                         
+                      ],
+                      "self":false,
+                      "to_port":0
+                   }
+                ],
+                "ingress":[
+                   {
+                      "cidr_blocks":[
+                         "0.0.0.0/0"
+                      ],
+                      "description":"",
+                      "from_port":443,
+                      "ipv6_cidr_blocks":[
+                         
+                      ],
+                      "prefix_list_ids":[
+                         
+                      ],
+                      "protocol":"tcp",
+                      "security_groups":[
+                         
+                      ],
+                      "self":false,
+                      "to_port":443
+                   },
+                   {
+                      "cidr_blocks":[
+                         "0.0.0.0/0"
+                      ],
+                      "description":"",
+                      "from_port":80,
+                      "ipv6_cidr_blocks":[
+                         
+                      ],
+                      "prefix_list_ids":[
+                         
+                      ],
+                      "protocol":"tcp",
+                      "security_groups":[
+                         
+                      ],
+                      "self":false,
+                      "to_port":80
+                   }
+                ],
+                "revoke_rules_on_delete":false,
+                "tags":"None",
+                "timeouts":"None",
+                "vpc_id":"vpc-12345678"
+             },
+             "after_unknown":{
+                "arn":true,
+                "egress":[
+                   {
+                      "cidr_blocks":[
+                         false
+                      ],
+                      "ipv6_cidr_blocks":[
+                         
+                      ],
+                      "prefix_list_ids":[
+                         
+                      ],
+                      "security_groups":[
+                         
+                      ]
+                   }
+                ],
+                "id":true,
+                "ingress":[
+                   {
+                      "cidr_blocks":[
+                         false
+                      ],
+                      "ipv6_cidr_blocks":[
+                         
+                      ],
+                      "prefix_list_ids":[
+                         
+                      ],
+                      "security_groups":[
+                         
+                      ]
+                   },
+                   {
+                      "cidr_blocks":[
+                         false
+                      ],
+                      "ipv6_cidr_blocks":[
+                         
+                      ],
+                      "prefix_list_ids":[
+                         
+                      ],
+                      "security_groups":[
+                         
+                      ]
+                   }
+                ],
+                "name":true,
+                "name_prefix":true,
+                "owner_id":true
+             }
+          }
+       }
+    ]
+ }

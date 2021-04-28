@@ -14,7 +14,9 @@ docker run \
     -w $repo_dir \
     -v $repo_dir:$repo_dir \
     -v /var/run/docker.sock:/var/run/docker.sock \
-    $name \
+    $name:latest \
         py.test \
         --tb=short \
+        -s \
+        -v \
         "$@"
