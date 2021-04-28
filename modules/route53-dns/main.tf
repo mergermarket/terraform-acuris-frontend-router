@@ -10,6 +10,7 @@ locals {
   zone = "${local.zone_prefix}${var.domain}"
   name = "${var.env == "live" ? "" : "${var.env}-"}${var.name}"
   fqdn = "${local.name}.${local.zone}"
+  dns_record_name = "${var.env == "live" ? var.name : "${var.env}-${var.name}"}.${data.template_file.domain.rendered}"
 }
 
 data "template_file" "domain" {
@@ -25,7 +26,7 @@ resource "aws_route53_record" "dns_record" {
   count = var.alias ? 0 : 1
 
   zone_id = local.zone_id
-  name    = var.dev_subdomain ? "${var.env == "live" ? var.name : "${var.env}-${var.name}"}.${data.template_file.domain.rendered}" : "${local.fqdn}" 
+  name    = var.dev_subdomain ? local.dns_record_name : local.fqdn
 
   type    = "CNAME"
   records = [var.target]
@@ -40,7 +41,7 @@ resource "aws_route53_record" "alb_alias" {
   count = var.alias ? 1 : 0
 
   zone_id = local.zone_id
-  name    = var.dev_subdomain ? "${var.env == "live" ? var.name : "${var.env}-${var.name}"}.${data.template_file.domain.rendered}" : "${local.fqdn}"
+  name    = var.dev_subdomain ? local.dns_record_name : "${local.fqdn}"
   type    = "A"
 
   alias {
