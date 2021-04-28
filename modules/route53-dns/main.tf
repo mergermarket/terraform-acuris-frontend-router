@@ -25,7 +25,7 @@ data "template_file" "domain" {
 resource "aws_route53_record" "dns_record" {
   count = "${1 - var.alias}"
 
-  zone_id = data.aws_route53_zone.dns_domain.*.zone_id
+  zone_id = local.zone_id
   name    = local.fqdn
 
   type    = "CNAME"
@@ -40,7 +40,7 @@ resource "aws_route53_record" "dns_record" {
 resource "aws_route53_record" "alb_alias" {
   count = var.alias
 
-  zone_id = data.aws_route53_zone.dns_domain.*.zone_id
+  zone_id = local.zone_id
   name    = var.dev_subdomain ? local.dns_record_name : local.fqdn
   type    = "A"
 
