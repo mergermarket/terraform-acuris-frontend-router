@@ -240,7 +240,13 @@ variable "idle_timeout" {
   default     = "60"
 }
 
+variable "dev_subdomain" {
+  description = "Adds dev prefix on subdomains for certificate zoneid ex: *.dev.mmgdev.acuisbackend.com"
+  default     = true
+}
+
 variable "run_data" {
   description = "Used to switch off data resources when unit testing"
   default     = true
 }
+

@@ -21,7 +21,7 @@ module "alb" {
   subnet_ids               = split(",", var.platform_config["public_subnets"])
   extra_security_groups    = [var.platform_config["ecs_cluster.${var.ecs_cluster}.client_security_group"]]
   internal                 = "false"
-  certificate_domain_name  = format("*.%s%s", var.env != "live" ? "dev." : "", var.alb_domain)
+  certificate_domain_name  = var.dev_subdomain ? format("*.%s%s", var.env != "live" ? "dev." : "", var.alb_domain) : "*.${var.alb_domain}"
   default_target_group_arn = aws_alb_target_group.default_target_group.arn
   access_logs_bucket       = lookup(var.platform_config, "elb_access_logs_bucket", "")
   access_logs_enabled      = lookup(var.platform_config, "elb_access_logs_bucket", "") == "" ? false : true
@@ -38,13 +38,14 @@ module "alb" {
 module "dns_record" {
   source = "./modules/route53-dns"
 
-  domain      = var.alb_domain
-  name        = var.component
-  env         = var.env
-  target      = module.alb.alb_dns_name
-  alb_zone_id = module.alb.alb_zone_id
-  alias       = "1"
-  zone_id     = var.run_data ? "" : "TESTZONEID"
+  dev_subdomain = var.dev_subdomain
+  domain        = var.alb_domain
+  name          = var.component
+  env           = var.env
+  target        = module.alb.alb_dns_name
+  alb_zone_id   = module.alb.alb_zone_id
+  alias         = "1"
+  zone_id       = var.run_data ? "" : "TESTZONEID"
 }
 
 locals {
