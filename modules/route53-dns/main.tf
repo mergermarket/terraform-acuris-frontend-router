@@ -41,7 +41,7 @@ resource "aws_route53_record" "alb_alias" {
   count = var.alias ? 1 : 0
 
   zone_id = local.zone_id
-  name    = var.dev_subdomain ? local.dns_record_name : "${local.fqdn}"
+  name    = var.dev_subdomain ? local.dns_record_name : local.fqdn
   type    = "A"
 
   alias {
