@@ -95,27 +95,3 @@ def test_create_public_alb_security_group(e2e_plan_runner):
     
     assert_resource_changes_action(plan.resource_changes,"create", 1)
     assert_resource_changes('create_public_alb_security_group',plan.resource_changes)
-
-
-def test_fastly_shield(e2e_plan_runner):
-    os.environ.update({'FASTLY_API_KEY': 'querty'})
-
-    env = 'testenv'
-    component = 'testcomponent'
-    team = 'testteam'
-
-    plan, _, resources = e2e_plan_runner(
-        FIXTURES_DIR,
-        tf_var_file=PLATFORM_CONFIG_FILE,
-        targets=['module.frontend_router_shield.module.fastly.fastly_service_v1.fastly'],
-        env=env, 
-        fastly_domain="externaldomain.com",
-
-        alb_domain="domain.com",
-        shield='test-shield',
-        team=team, 
-        component=component)
-    
-    assert_resource_changes_action(plan.resource_changes,"create", 4)
-    assert_resource_changes('fastly_shield',plan.resource_changes)
-
