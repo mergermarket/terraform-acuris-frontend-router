@@ -26,11 +26,15 @@ resource "aws_route53_record" "dns_record" {
   count = var.alias ? 0 : 1
 
   zone_id = local.zone_id
-  name    = local.fqdn
+  name    = var.dev_subdomain ? local.dns_record_name : local.fqdn
 
   type    = "CNAME"
   records = [var.target]
   ttl     = var.ttl
+
+  lifecycle {
+    prevent_destroy = true
+  }
 
 }
 
@@ -45,5 +49,9 @@ resource "aws_route53_record" "alb_alias" {
     name                   = var.target
     zone_id                = var.alb_zone_id
     evaluate_target_health = true
+  }
+
+  lifecycle {
+    prevent_destroy = true
   }
 }
