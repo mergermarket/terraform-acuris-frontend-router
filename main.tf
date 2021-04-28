@@ -38,7 +38,6 @@ module "alb" {
 module "dns_record" {
   source = "./modules/route53-dns"
 
-  dev_subdomain = var.dev_subdomain
   domain        = var.alb_domain
   name          = var.component
   env           = var.env

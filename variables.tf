@@ -242,7 +242,7 @@ variable "idle_timeout" {
 
 variable "dev_subdomain" {
   description = "Adds dev prefix on subdomains for certificate zoneid ex: *.dev.mmgdev.acuisbackend.com"
-  default     = true
+  default     = false
 }
 
 variable "run_data" {
