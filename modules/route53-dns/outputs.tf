@@ -1,5 +1,5 @@
 output "rendered" {
-  value = data.template_file.domain.rendered
+  value = local.zone
 }
 
 output "fqdn" {
