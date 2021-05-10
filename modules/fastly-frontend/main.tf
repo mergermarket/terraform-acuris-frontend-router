@@ -180,26 +180,21 @@ resource "fastly_service_v1" "fastly" {
 
   vcl {
     name    = "custom_vcl"
-    content = data.template_file.custom_vcl.rendered
+    content = templatefile("${path.module}/custom.vcl",
+      {
+        proxy_error_response        = var.proxy_error_response
+        custom_vcl_backends         = var.custom_vcl_backends
+        custom_vcl_recv             = var.custom_vcl_recv
+        custom_vcl_recv_no_shield   = var.custom_vcl_recv_no_shield
+        custom_vcl_recv_shield_only = var.custom_vcl_recv_shield_only
+        custom_vcl_error            = var.custom_vcl_error
+        custom_vcl_deliver          = var.custom_vcl_deliver
+        vcl_recv_default_action     = var.caching == "true" ? "lookup" : "pass"
+      })
     main    = true
   }
 
   force_destroy = true
-}
-
-data "template_file" "custom_vcl" {
-  template = file("${path.module}/custom.vcl")
-
-  vars = {
-    proxy_error_response        = var.proxy_error_response
-    custom_vcl_backends         = var.custom_vcl_backends
-    custom_vcl_recv             = var.custom_vcl_recv
-    custom_vcl_recv_no_shield   = var.custom_vcl_recv_no_shield
-    custom_vcl_recv_shield_only = var.custom_vcl_recv_shield_only
-    custom_vcl_error            = var.custom_vcl_error
-    custom_vcl_deliver          = var.custom_vcl_deliver
-    vcl_recv_default_action     = var.caching == "true" ? "lookup" : "pass"
-  }
 }
 
 # resource performing bare-domain redirection to prefix; only for live
