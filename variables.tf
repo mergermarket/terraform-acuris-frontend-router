@@ -245,6 +245,11 @@ variable "dev_subdomain" {
   default     = false
 }
 
+variable "alias" {
+  description = "Creates a CNAME dns record type"
+  default = true
+}
+
 variable "run_data" {
   description = "Used to switch off data resources when unit testing"
   default     = true

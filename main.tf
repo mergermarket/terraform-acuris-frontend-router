@@ -43,7 +43,7 @@ module "dns_record" {
   env           = var.env
   target        = module.alb.alb_dns_name
   alb_zone_id   = module.alb.alb_zone_id
-  alias         = "1"
+  alias         = var.alias
   dev_subdomain = var.dev_subdomain
   zone_id       = var.run_data ? "" : "TESTZONEID"
 }
