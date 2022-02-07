@@ -166,6 +166,24 @@ resource "fastly_service_v1" "fastly" {
     priority        = 10
   }
 
+  header {
+    name               = "HSTS"
+    type               = "response"
+    action             = "set"
+    destination        = "http.Strict-Transport-Security"
+    source             = "\"max-age=63072000; preload\""
+    priority           = 10
+    ignore_if_set      = true
+    response_condition = "hsts-if-force-ssl"
+  }
+
+  condition {
+    name      = "hsts-if-force-ssl"
+    type      = "RESPONSE"
+    priority  = 10
+    statement = var.force_ssl
+  }
+
   syslog {
     name               = "${local.full_domain_name}-syslog"
     address            = "intake.logs.datadoghq.com"
