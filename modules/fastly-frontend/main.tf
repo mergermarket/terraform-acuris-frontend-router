@@ -34,7 +34,7 @@ resource "fastly_service_v1" "fastly" {
   gzip {
     name          = "file extensions and content types"
     extensions    = ["css", "js"]
-    content_types = ["text/html", "text/css", "application/json"]
+    content_types = ["text/html", "text/css", "application/json", "text/javascript", "application/javascript"]
   }
 
   request_setting {
