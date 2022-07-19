@@ -34,7 +34,7 @@ resource "fastly_service_v1" "fastly" {
   gzip {
     name          = "file extensions and content types"
     extensions    = ["css", "js"]
-    content_types = ["text/html", "text/css", "application/json"]
+    content_types = ["text/html", "text/css", "application/json", "text/javascript", "application/javascript"]
   }
 
   request_setting {
@@ -164,6 +164,24 @@ resource "fastly_service_v1" "fastly" {
     source          = "beresp.http.${var.surrogate_key_name}"
     cache_condition = "surrogate-key-condition"
     priority        = 10
+  }
+
+  header {
+    name               = "HSTS"
+    type               = "response"
+    action             = "set"
+    destination        = "http.Strict-Transport-Security"
+    source             = "\"max-age=63072000; preload\""
+    priority           = 10
+    ignore_if_set      = true
+    response_condition = "hsts-if-force-ssl"
+  }
+
+  condition {
+    name      = "hsts-if-force-ssl"
+    type      = "RESPONSE"
+    priority  = 10
+    statement = var.force_ssl
   }
 
   syslog {

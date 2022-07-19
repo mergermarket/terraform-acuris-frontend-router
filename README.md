@@ -1,7 +1,7 @@
 Frontend Router terraform module
 ================================
 
-[![Build Status](https://travis-ci.org/mergermarket/tf_frontend_router.svg?branch=no-default-service)](https://travis-ci.org/mergermarket/tf_frontend_router)
+[![Test](https://github.com/mergermarket/terraform-acuris-frontend-router/actions/workflows/test.yml/badge.svg)](https://github.com/mergermarket/terraform-acuris-frontend-router/actions/workflows/test.yml)
 
 This modules crates components needed to be able to expose your application(s) to the public.
 
