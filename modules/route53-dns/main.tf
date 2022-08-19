@@ -5,7 +5,7 @@ data "aws_route53_zone" "dns_domain" {
 }
 
 locals {
-  zone_id = var.zone_id == "" ? element(data.aws_route53_zone.dns_domain.*.zone_id, 0) : var.zone_id
+  zone_id = var.zone_id == "" ? element(concat(data.aws_route53_zone.dns_domain.*.zone_id, list("")), 0) : var.zone_id
   zone_prefix = "${var.dev_subdomain && var.env != "live" ? "dev." : ""}"
   zone = "${local.zone_prefix}${var.domain}"
   name = var.env == "live" ? var.name : "${var.env}-${var.name}"
