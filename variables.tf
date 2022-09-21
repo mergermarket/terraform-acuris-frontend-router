@@ -255,3 +255,8 @@ variable "run_data" {
   default     = true
 }
 
+
+variable "sticky" {
+  description = "turn on sticky"
+  default = []
+}

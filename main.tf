@@ -81,5 +81,15 @@ resource "aws_alb_target_group" "default_target_group" {
     service     = "${var.env}-${local.default_target_group_component}"
     team        = var.team
   }
+
+  dynamic "stickiness" {
+    for_each = var.sticky
+    content {
+      cookie_duration = stickiness.value["cookie_duration"]
+      cookie_name     = stickiness.value["cookie_name"]
+      enabled         = stickiness.value["enabled"]
+      type            = stickiness.value["type"]
+    }
+  } 
 }
 
