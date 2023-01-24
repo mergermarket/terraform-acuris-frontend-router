@@ -4,6 +4,11 @@ variable "fastly_domain" {
   type        = string
 }
 
+variable "additional_fastly_domains" {
+  default = []
+  type = list(string)
+}
+
 variable "env" {
   description = "Environment name"
 }
@@ -255,8 +260,12 @@ variable "run_data" {
   default     = true
 }
 
-
 variable "sticky" {
   description = "turn on sticky"
   default = []
+}
+
+variable "override_host" {
+  description = "Used to enable or disable setting of default_host (Override host in UI) value"
+  default     = "true"
 }

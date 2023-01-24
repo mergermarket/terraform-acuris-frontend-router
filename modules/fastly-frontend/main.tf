@@ -15,6 +15,13 @@ resource "fastly_service_v1" "fastly" {
     name = local.full_domain_name
   }
 
+  dynamic "domain" {
+     for_each = var.additional_domain_names
+     content {
+       name = var.env == "live" ? domain.value : "${var.env}-${domain.value}"
+     }
+   }
+
   default_host = var.override_host == "true" ? local.full_domain_name : ""
   default_ttl  = 60
 

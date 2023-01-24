@@ -4,6 +4,12 @@ variable "domain_name" {
   description = "Domain name to use for this Fastly configuration"
 }
 
+variable "additional_domain_names" {
+  type        = list(string)
+  description = "List of additional domain names for fastly"
+  default     = []
+}
+
 variable "bare_redirect_domain_name" {
   type        = string
   default     = ""

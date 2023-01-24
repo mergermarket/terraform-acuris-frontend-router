@@ -2,6 +2,7 @@ module "fastly" {
   source = "./modules/fastly-frontend"
 
   domain_name                 = var.fastly_domain
+  additional_domain_names     = var.additional_fastly_domains
   bare_redirect_domain_name   = var.bare_redirect_domain_name
   backend_address             = module.dns_record.fqdn
   env                         = var.env
@@ -25,5 +26,6 @@ module "fastly" {
   shield                      = var.shield
   surrogate_key_name          = var.surrogate_key_name
   run_data                    = var.run_data
+  override_host               = var.override_host
 }
 
