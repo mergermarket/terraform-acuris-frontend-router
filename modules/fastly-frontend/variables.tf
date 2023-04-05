@@ -13,7 +13,7 @@ variable "additional_domain_names" {
 variable "domain_no_prefix" {
   type        = string
   description = "Domain without env prefix used for supporting legacy domain urls"
-  default = ""
+  default     = ""
 }
 
 variable "bare_redirect_domain_name" {
