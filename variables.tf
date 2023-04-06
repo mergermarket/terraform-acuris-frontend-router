@@ -10,9 +10,9 @@ variable "additional_fastly_domains" {
 }
 
 variable "domain_no_prefix" {
-  type        = string
-  description = "Domain without env prefix used for supporting legacy domain urls"
-  default     = ""
+  type        = list(string)
+  description = "List of domains without env prefix used for supporting legacy domain urls"
+  default     = []
 }
 
 variable "env" {

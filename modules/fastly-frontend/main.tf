@@ -23,7 +23,7 @@ resource "fastly_service_v1" "fastly" {
    }
 
   dynamic "domain" {
-     for_each = (var.domain_no_prefix == "" ? [] : [var.domain_no_prefix])
+     for_each = var.domain_no_prefix
      content {
        name = domain.value 
      }
