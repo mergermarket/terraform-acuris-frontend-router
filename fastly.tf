@@ -3,6 +3,7 @@ module "fastly" {
 
   domain_name                 = var.fastly_domain
   additional_domain_names     = var.additional_fastly_domains
+  domain_no_prefix            = var.domain_no_prefix
   bare_redirect_domain_name   = var.bare_redirect_domain_name
   backend_address             = module.dns_record.fqdn
   env                         = var.env

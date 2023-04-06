@@ -22,6 +22,13 @@ resource "fastly_service_v1" "fastly" {
      }
    }
 
+  dynamic "domain" {
+     for_each = var.domain_no_prefix
+     content {
+       name = domain.value 
+     }
+   }
+
   default_host = var.override_host == "true" ? local.full_domain_name : ""
   default_ttl  = 60
 
