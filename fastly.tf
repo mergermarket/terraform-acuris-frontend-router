@@ -1,6 +1,6 @@
 module "fastly" {
   source = "./modules/fastly-frontend"
-  count = 1
+  count = var.cloudfront_migrated == "false" ? 1 : 0
 
   domain_name                 = var.fastly_domain
   additional_domain_names     = var.additional_fastly_domains

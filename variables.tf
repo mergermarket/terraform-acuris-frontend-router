@@ -1,3 +1,10 @@
+variable "cloudfront_migrated" {
+  description = "Whether the service has been migrated to CloudFront"
+  type        = string
+  default     = "false"
+  
+}
+
 # required
 variable "fastly_domain" {
   description = ""
