@@ -5,12 +5,14 @@ data "aws_acm_certificate" "cert" {
 }
 
 resource "aws_alb" "alb" {
-  name            = replace(replace(var.name, "/(.{0,32}).*/", "$1"), "/^-+|-+$/", "")
-  internal        = var.internal
-  security_groups = concat([aws_security_group.default.id], var.extra_security_groups)
-  subnets         = var.subnet_ids
-  tags            = var.tags
-  idle_timeout    = var.idle_timeout
+  name                 = replace(replace(var.name, "/(.{0,32}).*/", "$1"), "/^-+|-+$/", "")
+  internal             = var.internal
+  security_groups      = concat([aws_security_group.default.id], var.extra_security_groups)
+  subnets              = var.subnet_ids
+  tags                 = var.tags
+  idle_timeout         = var.idle_timeout
+  preserve_host_header = var.preserve_host_header
+
 
   access_logs {
     bucket  = var.access_logs_bucket

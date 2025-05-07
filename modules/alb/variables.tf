@@ -63,3 +63,8 @@ variable "run_data" {
   default     = true
 }
 
+variable "preserve_host_header" {
+  description = "Whether to preserve the host header when routing to the target group"
+  type        = string
+  default     = "false"
+}
