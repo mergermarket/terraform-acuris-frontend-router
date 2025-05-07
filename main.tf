@@ -27,6 +27,7 @@ module "alb" {
   access_logs_enabled      = lookup(var.platform_config, "elb_access_logs_bucket", "") == "" ? false : true
   idle_timeout             = var.idle_timeout
   run_data                 = var.run_data
+  preserve_host_header     = var.preserve_host_header
 
   tags = {
     component   = var.component

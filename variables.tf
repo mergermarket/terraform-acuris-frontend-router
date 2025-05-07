@@ -282,3 +282,9 @@ variable "override_host" {
   description = "Used to enable or disable setting of default_host (Override host in UI) value"
   default     = "true"
 }
+
+variable "preserve_host_header" {
+  description = "Whether to preserve the host header when routing to the target group"
+  type        = string
+  default     = "false"
+}
