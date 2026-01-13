@@ -1,8 +1,15 @@
+terraform {
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 6.28.0"
+    }
+  }
+}
 # configure provider to not try too hard talking to AWS API
 provider "aws" {
   skip_credentials_validation = true
   skip_metadata_api_check     = true
-  skip_get_ec2_platforms      = true
   skip_region_validation      = true
   skip_requesting_account_id  = true
   max_retries                 = 1
