@@ -2,3 +2,4 @@
 .cache
 .hypothesis
 .terraform.lock.hcl
+terraform.tfstate
