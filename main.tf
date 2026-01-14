@@ -15,7 +15,7 @@ module "alb" {
 
   name = "${replace(
     replace(
-      format("%s-%s", var.env, var.component),
+      format("%s-%s", local.simple_env, var.component),
       "/(.{0,25}).*/",
       "$1",
     ),
