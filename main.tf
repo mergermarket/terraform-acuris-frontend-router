@@ -46,7 +46,7 @@ module "dns_record" {
 
   domain        = var.alb_domain
   name          = var.component
-  env           = replace(var.env,"_", "-")
+  env           = var.env
   target        = module.alb.alb_dns_name
   alb_zone_id   = module.alb.alb_zone_id
   alias         = var.alias
