@@ -5,7 +5,7 @@ data "aws_route53_zone" "dns_domain" {
 }
 
 locals {
-  is_live_env = regex("^live(_.+)?$", var.env)
+  is_live_env = can(regex("^live(_.+)?$"), var.env)
   //RFC 1738 compliant names
   fixed_env_for_name = replace(var.env, "_", "-")
   zone_id = var.zone_id == "" ? element(concat(data.aws_route53_zone.dns_domain.*.zone_id, [""]), 0) : var.zone_id
