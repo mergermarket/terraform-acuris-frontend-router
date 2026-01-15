@@ -1,7 +1,12 @@
+locals {
+  simple_env = can(split("_", var.env)) ? split("_", var.env)[0] : var.env
+  default_target_group_component = var.default_target_group_component != "" ? var.default_target_group_component : "${var.component}-default-target-group"
+}
+
 module "default_backend_ecs_service" {
   source = "./modules/deprecated"
 
-  name   = format("%s-%s-404", var.env, var.component)
+  name   = format("%s-%s-404", local.simple_env, var.component)
   vpc_id = var.platform_config["vpc"]
 }
 
@@ -10,7 +15,7 @@ module "alb" {
 
   name = "${replace(
     replace(
-      format("%s-%s", var.env, var.component),
+      format("%s-%s", local.simple_env, var.component),
       "/(.{0,25}).*/",
       "$1",
     ),
@@ -49,13 +54,9 @@ module "dns_record" {
   zone_id       = var.run_data ? "" : "TESTZONEID"
 }
 
-locals {
-  default_target_group_component = var.default_target_group_component != "" ? var.default_target_group_component : "${var.component}-default-target-group"
-}
-
 resource "aws_alb_target_group" "default_target_group" {
   name = replace(
-    replace("${var.env}-default-${var.component}", "/(.{0,32}).*/", "$1"),
+    replace(format("%s-default-%s", local.simple_env, var.component), "/(.{0,32}).*/", "$1"),
     "/^-+|-+$/",
     "",
   )
