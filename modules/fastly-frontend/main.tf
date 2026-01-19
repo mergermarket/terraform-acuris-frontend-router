@@ -5,11 +5,12 @@ module "secretsmanager" {
 }
 
 locals {
-  full_domain_name = "${var.env == "live" ? "" : format("%s-", var.env)}${var.domain_name}"
+  fixed_env_for_fqdn = replace(var.env, "_", "-")
+  full_domain_name = "${var.env == "live" ? "" : format("%s-", local.fixed_env_for_fqdn)}${var.domain_name}"
 }
 
 resource "fastly_service_v1" "fastly" {
-  name = "${var.env}-${var.domain_name}"
+  name = "${local.fixed_env_for_fqdn}-${var.domain_name}"
 
   domain {
     name = local.full_domain_name
@@ -18,7 +19,7 @@ resource "fastly_service_v1" "fastly" {
   dynamic "domain" {
      for_each = var.additional_domain_names
      content {
-       name = var.env == "live" ? domain.value : "${var.env}-${domain.value}"
+       name = var.env == "live" ? domain.value : "${local.fixed_env_for_fqdn}-${domain.value}"
      }
    }
 
