@@ -288,3 +288,9 @@ variable "preserve_host_header" {
   type        = string
   default     = "false"
 }
+
+variable "ingress_prefix_list_ids" {
+  description = "A list of customer managed prefix list IDs allowed to access the ALB on ports 80 and 443. If empty, the ALB is open to 0.0.0.0/0 on those ports"
+  type        = list(string)
+  default     = []
+}

@@ -33,6 +33,7 @@ module "alb" {
   idle_timeout             = var.idle_timeout
   run_data                 = var.run_data
   preserve_host_header     = var.preserve_host_header
+  ingress_prefix_list_ids  = var.ingress_prefix_list_ids
 
   tags = {
     component   = var.component

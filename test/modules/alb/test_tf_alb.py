@@ -34,3 +34,29 @@ def test_create_alb_with_tags(plan_runner):
     assert len(resources) == 3
     assert_resource_changes_action(plan.resource_changes,"create", 3)
     assert_resource_changes('create_alb_with_tags',plan.resource_changes)
+
+def get_security_group_ingress(plan, module):
+    sg = plan.resource_changes[f'module.{module}.aws_security_group.default']
+    return {
+        rule['from_port']: (rule['cidr_blocks'], rule['prefix_list_ids'])
+        for rule in sg['change']['after']['ingress']
+    }
+
+def test_security_group_ingress_defaults_to_open(plan_runner):
+    plan, _ = plan_runner(FIXTURES_DIR, targets=["module.alb_test"])
+
+    assert get_security_group_ingress(plan, 'alb_test') == {
+        80: (['0.0.0.0/0'], []),
+        443: (['0.0.0.0/0'], []),
+    }
+
+def test_security_group_ingress_prefix_list_ids(plan_runner):
+    plan, _ = plan_runner(FIXTURES_DIR, targets=["module.alb_test_with_ingress_prefix_list_ids"])
+
+    prefix_list_ids = ['pl-0123456789abcdef0', 'pl-0fedcba9876543210']
+    ingress = get_security_group_ingress(plan, 'alb_test_with_ingress_prefix_list_ids')
+    assert sorted(ingress) == [80, 443]
+    for port in (80, 443):
+        cidr_blocks, ids = ingress[port]
+        assert cidr_blocks == []
+        assert sorted(ids) == prefix_list_ids

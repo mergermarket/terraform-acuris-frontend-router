@@ -37,6 +37,7 @@ Module Input Variables
 - `health_check_healthy_threshold` - (string) - The number of consecutive health checks successes required before considering an unhealthy target healthy (default `"2"`)
 - `health_check_unhealthy_threshold` - (string) - The number of consecutive health check failures required before considering the target unhealthy (default `"2"`)
 - `health_check_matcher` - (string) - The HTTP codes to use when checking for a successful response from a target. You can specify multiple values (for example, "200,202") or a range of values (for example, "200-299") (default `"200-299"`) 
+- `ingress_prefix_list_ids` - (list(string)) - IDs of customer managed prefix lists allowed to access the ALB on ports 80 and 443, e.g. to restrict access to Fastly or proxy IP ranges; each prefix list counts its maximum number of entries towards the security group rule limit (default `[]`, i.e. open to `0.0.0.0/0`)
 
 Usage
 -----
