@@ -20,6 +20,7 @@ Module Input Variables
 - `default_target_group_arn` - (string) - **REQUIRED** - The ARN of the default Target Group to which to route traffic
 - `internal` - (bool) - OPTIONAL - If true, the ALB will be internal; default: `true`
 - `extra_security_groups` - (list) - OPTIONAL - Extra security groups to be attached to ALB
+- `ingress_prefix_list_ids` - (list) - OPTIONAL - IDs of customer managed prefix lists allowed to access the ALB on ports 80 and 443; default: `[]` (empty - open to `0.0.0.0/0`)
 - `tags` - (map) - OPTIONAL - Map of tags to be applied to the resources (just to ALB as ALB Listeners cannot be tagged); default: `{}` (empty - no tags)
 
 Usage

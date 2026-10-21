@@ -39,3 +39,15 @@ module "alb_test_with_tags" {
     service   = "service"
   }
 }
+
+module "alb_test_with_ingress_prefix_list_ids" {
+  source = "../../../../modules/alb"
+
+  name                     = "super-nice-alb-name"
+  vpc_id                   = "foobar"
+  subnet_ids               = ["subnet-b46032ec", "subnet-ca4311ef", "subnet-ba881221"]
+  certificate_domain_name  = "mydomain.com"
+  default_target_group_arn = "arn:aws:elasticloadbalancing:eu-west-1:111111111111:foobar/foobar"
+  run_data                 = false
+  ingress_prefix_list_ids  = ["pl-0123456789abcdef0", "pl-0fedcba9876543210"]
+}
