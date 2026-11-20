@@ -32,8 +32,9 @@ def test_resources(e2e_plan_runner):
         team="foobar", 
         component="foobar")
 
-    assert len(modules) == 4
-    assert len(resources) == 6
+    # alb, dns_record and default_backend_ecs_service - Fastly is no longer managed (see fastly.tf)
+    assert len(modules) == 3
+    assert len(resources) == 5
 
 def test_create_public_alb_in_public_subnets(e2e_plan_runner):
     os.environ.update({'FASTLY_API_KEY': 'querty'})
