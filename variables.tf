@@ -1,5 +1,5 @@
 variable "cloudfront_migrated" {
-  description = "Whether the service has been migrated to CloudFront"
+  description = "DEPRECATED - no longer used. Fastly is no longer managed by this module (see fastly.tf); kept so existing callers don't break"
   type        = string
   default     = "false"
   
